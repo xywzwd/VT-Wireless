@@ -1,0 +1,140 @@
+\hypertarget{classCRTSControl}{}\section{C\+R\+T\+S\+Control Class Reference}
+\label{classCRTSControl}\index{C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}}
+
+
+{\ttfamily \#include $<$Filter.\+hpp$>$}
+
+
+
+Collaboration diagram for C\+R\+T\+S\+Control\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=156pt]{classCRTSControl__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \hyperlink{classCRTSControl_ad9acd9abb7620a0b34b724b26a47740d}{total\+Bytes\+In} (uint32\+\_\+t in\+Channel\+Num=\hyperlink{classCRTSFilter_a9ea354654e8e2e8ce3bff293cc35fafe}{C\+R\+T\+S\+Filter\+::\+A\+L\+L\+\_\+\+C\+H\+A\+N\+N\+E\+LS}) const
+\item 
+uint64\+\_\+t \hyperlink{classCRTSControl_ae39f48f9761149fabebe68870ec2b8b8}{total\+Bytes\+Out} (uint32\+\_\+t out\+Channel\+Num=\hyperlink{classCRTSFilter_a9ea354654e8e2e8ce3bff293cc35fafe}{C\+R\+T\+S\+Filter\+::\+A\+L\+L\+\_\+\+C\+H\+A\+N\+N\+E\+LS}) const
+\item 
+std\+::string \hyperlink{classCRTSControl_a493557760b3354b32de76fc9f60feaed}{get\+Next\+Parameter\+Name} (bool start=false, bool $\ast$has\+Set=0, bool $\ast$has\+Get=0)
+\item 
+void \hyperlink{classCRTSControl_aca9bf2af70e093eb050f1b964594c9ec}{get\+Parameter} (const std\+::string pname, std\+::function$<$ void(double)$>$ callback)
+\item 
+double \hyperlink{classCRTSControl_a49b888b6fb53ca9f407b227cc6c93d9b}{get\+Parameter} (const std\+::string pname)
+\item 
+bool \hyperlink{classCRTSControl_a80591c5f74bac27c33662884dfaa06ac}{set\+Parameter} (const std\+::string pname, const double \&val) const
+\item 
+void \hyperlink{classCRTSControl_a1cbcd31c134d09cb2619fde63e064727}{add\+Controller} (\hyperlink{classCRTSController}{C\+R\+T\+S\+Controller} $\ast$controller)
+\item 
+uint32\+\_\+t \hyperlink{classCRTSControl_acfb6005cbc2d5f22fd4703283c9636bd}{get\+Id} (void) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The C\+R\+T\+S\+Controls should be accessed in the \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} thread that it is associated with or in the main thread in a constructor.
+
+C\+R\+T\+S\+Controls is a factory of any number of Parameters. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCRTSControl_a1cbcd31c134d09cb2619fde63e064727}\label{classCRTSControl_a1cbcd31c134d09cb2619fde63e064727}} 
+\index{C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}!add\+Controller@{add\+Controller}}
+\index{add\+Controller@{add\+Controller}!C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}}
+\subsubsection{\texorpdfstring{add\+Controller()}{addController()}}
+{\footnotesize\ttfamily void C\+R\+T\+S\+Control\+::add\+Controller (\begin{DoxyParamCaption}\item[{\hyperlink{classCRTSController}{C\+R\+T\+S\+Controller} $\ast$}]{controller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Add a controller to a filter control callback list.
+
+This will cause the \hyperlink{classCRTSController_af9d93f0eee3c2d0969c6aaaaf94eb839}{C\+R\+T\+S\+Controller\+::execute()} to be called before every \hyperlink{classCRTSFilter_ab75eb3db5914c0d6b3781439d46b2301}{C\+R\+T\+S\+Filter\+::input()}.
+
+/param controller a pointer to the \hyperlink{classCRTSController}{C\+R\+T\+S\+Controller} object. \mbox{\Hypertarget{classCRTSControl_acfb6005cbc2d5f22fd4703283c9636bd}\label{classCRTSControl_acfb6005cbc2d5f22fd4703283c9636bd}} 
+\index{C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}!get\+Id@{get\+Id}}
+\index{get\+Id@{get\+Id}!C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}}
+\subsubsection{\texorpdfstring{get\+Id()}{getId()}}
+{\footnotesize\ttfamily uint32\+\_\+t C\+R\+T\+S\+Control\+::get\+Id (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+/return unique ID that can be quickly used to distinguish this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} from other C\+R\+T\+S\+Controls in this \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter}. \mbox{\Hypertarget{classCRTSControl_a493557760b3354b32de76fc9f60feaed}\label{classCRTSControl_a493557760b3354b32de76fc9f60feaed}} 
+\index{C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}!get\+Next\+Parameter\+Name@{get\+Next\+Parameter\+Name}}
+\index{get\+Next\+Parameter\+Name@{get\+Next\+Parameter\+Name}!C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}}
+\subsubsection{\texorpdfstring{get\+Next\+Parameter\+Name()}{getNextParameterName()}}
+{\footnotesize\ttfamily std\+::string C\+R\+T\+S\+Control\+::get\+Next\+Parameter\+Name (\begin{DoxyParamCaption}\item[{bool}]{start = {\ttfamily false},  }\item[{bool $\ast$}]{has\+Set = {\ttfamily 0},  }\item[{bool $\ast$}]{has\+Get = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get information about parameters in this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control}
+
+Iterates through all the parameters in this control getting the name and optionally whither there is a setter and a getter function for this parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & if set this will start at the beginning of the list of parameters in this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control}. The first time this is called by a \hyperlink{classCRTSController}{C\+R\+T\+S\+Controller} {\itshape start} should be true.\\
+\hline
+{\em has\+Set} & if set the value that this points to will get set to true if there is a setter function for this parameter, or it will get set to false otherwise.\\
+\hline
+{\em has\+Get} & if set the value that this points to will get set to true if there is a getter function for this parameter, or it will get set to false otherwise.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a std\+::string that is the name of this parameter. If the returned string is empty than we are at the end of the list of parameters. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCRTSControl_aca9bf2af70e093eb050f1b964594c9ec}\label{classCRTSControl_aca9bf2af70e093eb050f1b964594c9ec}} 
+\index{C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}!get\+Parameter@{get\+Parameter}}
+\index{get\+Parameter@{get\+Parameter}!C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}}
+\subsubsection{\texorpdfstring{get\+Parameter()}{getParameter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void C\+R\+T\+S\+Control\+::get\+Parameter (\begin{DoxyParamCaption}\item[{const std\+::string}]{pname,  }\item[{std\+::function$<$ void(double)$>$}]{callback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Set a callback that gets a parameter value from the \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} that this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} is associated with.
+
+The callback will be called when the stream is flowing. The callback will be called in the in the filter\textquotesingle{}s thread, before or during the filter\textquotesingle{}s input() is called. So this callback is associated with a particular filter that owns this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control}.
+
+/param callback function that is called any time that the parameter changes. \mbox{\Hypertarget{classCRTSControl_a49b888b6fb53ca9f407b227cc6c93d9b}\label{classCRTSControl_a49b888b6fb53ca9f407b227cc6c93d9b}} 
+\index{C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}!get\+Parameter@{get\+Parameter}}
+\index{get\+Parameter@{get\+Parameter}!C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}}
+\subsubsection{\texorpdfstring{get\+Parameter()}{getParameter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double C\+R\+T\+S\+Control\+::get\+Parameter (\begin{DoxyParamCaption}\item[{const std\+::string}]{pname }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get a parameter value from the \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} that this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} is associated with.
+
+/param pname the name of the parameter that we seek.
+
+/return the value of the parameter as a double. If the parameter with the name {\ttfamily pname} was not found, {\itshape N\+AN} is returned. \mbox{\Hypertarget{classCRTSControl_a80591c5f74bac27c33662884dfaa06ac}\label{classCRTSControl_a80591c5f74bac27c33662884dfaa06ac}} 
+\index{C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}!set\+Parameter@{set\+Parameter}}
+\index{set\+Parameter@{set\+Parameter}!C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}}
+\subsubsection{\texorpdfstring{set\+Parameter()}{setParameter()}}
+{\footnotesize\ttfamily bool C\+R\+T\+S\+Control\+::set\+Parameter (\begin{DoxyParamCaption}\item[{const std\+::string}]{pname,  }\item[{const double \&}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Set a parameter value from the \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} that this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} is associated with.
+
+/todo make a object set(pname) with method that uses operator \textquotesingle{}=\textquotesingle{}. Like set\mbox{[}\char`\"{}freq\char`\"{}\mbox{]}
+
+This should only be called in the excute() function which is passed this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control}. This will run filters input() thread before input() is called.
+
+/param pname the name of the parameter that we seek to set.
+
+/param val the value we wish to set the parameter to.
+
+/return true is this call affected the parameter. \mbox{\Hypertarget{classCRTSControl_ad9acd9abb7620a0b34b724b26a47740d}\label{classCRTSControl_ad9acd9abb7620a0b34b724b26a47740d}} 
+\index{C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}!total\+Bytes\+In@{total\+Bytes\+In}}
+\index{total\+Bytes\+In@{total\+Bytes\+In}!C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}}
+\subsubsection{\texorpdfstring{total\+Bytes\+In()}{totalBytesIn()}}
+{\footnotesize\ttfamily uint64\+\_\+t C\+R\+T\+S\+Control\+::total\+Bytes\+In (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{in\+Channel\+Num = {\ttfamily \hyperlink{classCRTSFilter_a9ea354654e8e2e8ce3bff293cc35fafe}{C\+R\+T\+S\+Filter\+::\+A\+L\+L\+\_\+\+C\+H\+A\+N\+N\+E\+LS}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+/param in\+Channel\+Num the channel number that the \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} is referring to.
+
+/return the total number of bytes that the associated input channel have been consumed by the associated \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} since the last start. \mbox{\Hypertarget{classCRTSControl_ae39f48f9761149fabebe68870ec2b8b8}\label{classCRTSControl_ae39f48f9761149fabebe68870ec2b8b8}} 
+\index{C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}!total\+Bytes\+Out@{total\+Bytes\+Out}}
+\index{total\+Bytes\+Out@{total\+Bytes\+Out}!C\+R\+T\+S\+Control@{C\+R\+T\+S\+Control}}
+\subsubsection{\texorpdfstring{total\+Bytes\+Out()}{totalBytesOut()}}
+{\footnotesize\ttfamily uint64\+\_\+t C\+R\+T\+S\+Control\+::total\+Bytes\+Out (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{out\+Channel\+Num = {\ttfamily \hyperlink{classCRTSFilter_a9ea354654e8e2e8ce3bff293cc35fafe}{C\+R\+T\+S\+Filter\+::\+A\+L\+L\+\_\+\+C\+H\+A\+N\+N\+E\+LS}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+/param out\+Channel\+Num the channel number that the \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} is referring to.
+
+/return the total number of bytes that the associated output channel have been pushed to the associated \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} that is connected since the last start.
+
+This may not be the same as the number of bytes consumed, \hyperlink{classCRTSControl_ad9acd9abb7620a0b34b724b26a47740d}{total\+Bytes\+In()}, by the connected \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter}, because there may be data queued up and the connected \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} may be waiting for a certain amount or type of data before it marks the data as consumed. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/progb/git/crts/include/crts/Filter.\+hpp\end{DoxyCompactItemize}

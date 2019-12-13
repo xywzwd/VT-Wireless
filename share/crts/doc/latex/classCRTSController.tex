@@ -1,0 +1,122 @@
+\hypertarget{classCRTSController}{}\section{C\+R\+T\+S\+Controller Class Reference}
+\label{classCRTSController}\index{C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}}
+
+
+{\ttfamily \#include $<$Filter.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classCRTSController_a9065844e7c7aac10e26dad339ee65a8c}{start} (\hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} $\ast$c, uint32\+\_\+t num\+Channels\+In, uint32\+\_\+t num\+Channels\+Out)
+\item 
+virtual void \hyperlink{classCRTSController_a883c09ddb21374753c3be0fc66f016fb}{stop} (\hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} $\ast$c)
+\item 
+virtual void \hyperlink{classCRTSController_af9d93f0eee3c2d0969c6aaaaf94eb839}{execute} (\hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} $\ast$c, const void $\ast$buffer, size\+\_\+t len, uint32\+\_\+t channel\+Num)=0
+\item 
+bool \hyperlink{classCRTSController_a7b167f03af923a194efecfc551015087}{print\+Stream\+Graph\+Dot\+P\+N\+G64} (int fd)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class C $>$ }\\C \hyperlink{classCRTSController_aa2b26a62c62fe5758ab5cc9104e96b56}{get\+Control} (const std\+::string name=\char`\"{}\char`\"{}, bool add\+Controller=true, bool \hyperlink{classCRTSController_a9065844e7c7aac10e26dad339ee65a8c}{start}=false)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A Controller module base class
+
+Used to monitor and control the filter flow stream by setting and getting \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} parameters, and directly executing code before inputting data chunks into filters. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classCRTSController_af9d93f0eee3c2d0969c6aaaaf94eb839}\label{classCRTSController_af9d93f0eee3c2d0969c6aaaaf94eb839}} 
+\index{C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}!execute@{execute}}
+\index{execute@{execute}!C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}}
+\subsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily virtual void C\+R\+T\+S\+Controller\+::execute (\begin{DoxyParamCaption}\item[{\hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} $\ast$}]{c,  }\item[{const void $\ast$}]{buffer,  }\item[{size\+\_\+t}]{len,  }\item[{uint32\+\_\+t}]{channel\+Num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+execute is called before each \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} that owns the \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} calls output() for the connected C\+R\+T\+S\+Filters.
+
+When this is called, we are running in the \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} that owns the \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} that is passed in. We can\textquotesingle{}t used controls from other \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} objects, because they may be accessed in other threads.
+
+This is the only method that that is not called from the main thread. All other methods are called in the main thread.
+
+/param c the \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} that is owned by the \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} that called this.
+
+/param buffer pointer to the next list of bytes that will come into the \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} that receive this data.
+
+/param len length of data that could be read, but may not necessarily be read after this call.
+
+/param channel\+Num the C\+R\+T\+S\+Filters channel number that it uses to refer to the connection in the filter stream. \mbox{\Hypertarget{classCRTSController_aa2b26a62c62fe5758ab5cc9104e96b56}\label{classCRTSController_aa2b26a62c62fe5758ab5cc9104e96b56}} 
+\index{C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}!get\+Control@{get\+Control}}
+\index{get\+Control@{get\+Control}!C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}}
+\subsubsection{\texorpdfstring{get\+Control()}{getControl()}}
+{\footnotesize\ttfamily template$<$class C $>$ \\
+C C\+R\+T\+S\+Controller\+::get\+Control (\begin{DoxyParamCaption}\item[{const std\+::string}]{name = {\ttfamily \char`\"{}\char`\"{}},  }\item[{bool}]{add\+Controller = {\ttfamily true},  }\item[{bool}]{start = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Returns 0 if the control with name name was not found in the list of all C\+R\+TS controls. The particular \hyperlink{classCRTSController}{C\+R\+T\+S\+Controller} can get pointers to any \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} objects.
+
+You do not need to (or want to) delete the \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} object that this points to. It is managed by the associated \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} object.
+
+This must be called in the main thread in \hyperlink{classCRTSController_a9065844e7c7aac10e26dad339ee65a8c}{start()} or \hyperlink{classCRTSController_a883c09ddb21374753c3be0fc66f016fb}{stop()}.
+
+The \hyperlink{classCRTSController}{C\+R\+T\+S\+Controller} implementation must include the particular \hyperlink{classCRTSFilter}{C\+R\+T\+S\+Filter} interface header file to get access to the control methods that are implemented.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000002}{Todo}]add example code.\end{DoxyRefDesc}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the unique (across the \hyperlink{classCRTSStream}{C\+R\+T\+S\+Stream}) name of this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control}. If name is an empty string than this will iterate through all controls returning them in std\+::map iterated order and return 0 at the end.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} object pointer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCRTSController_a7b167f03af923a194efecfc551015087}\label{classCRTSController_a7b167f03af923a194efecfc551015087}} 
+\index{C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}!print\+Stream\+Graph\+Dot\+P\+N\+G64@{print\+Stream\+Graph\+Dot\+P\+N\+G64}}
+\index{print\+Stream\+Graph\+Dot\+P\+N\+G64@{print\+Stream\+Graph\+Dot\+P\+N\+G64}!C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}}
+\subsubsection{\texorpdfstring{print\+Stream\+Graph\+Dot\+P\+N\+G64()}{printStreamGraphDotPNG64()}}
+{\footnotesize\ttfamily bool C\+R\+T\+S\+Controller\+::print\+Stream\+Graph\+Dot\+P\+N\+G64 (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})}
+
+print the stream graph image to a file descriptor
+
+For example\+: we use this to send a base 64 encoded P\+NG image to a socket.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & is the file descriptor to write the P\+NG file to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false on success and true on error. This will spew on error. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCRTSController_a9065844e7c7aac10e26dad339ee65a8c}\label{classCRTSController_a9065844e7c7aac10e26dad339ee65a8c}} 
+\index{C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}!start@{start}}
+\index{start@{start}!C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}}
+\subsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily virtual void C\+R\+T\+S\+Controller\+::start (\begin{DoxyParamCaption}\item[{\hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} $\ast$}]{c,  }\item[{uint32\+\_\+t}]{num\+Channels\+In,  }\item[{uint32\+\_\+t}]{num\+Channels\+Out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+start is called after all the filters start and before the stream is running.
+
+A module class that inherits \hyperlink{classCRTSController}{C\+R\+T\+S\+Controller} may opt out of writing a \hyperlink{classCRTSController_a9065844e7c7aac10e26dad339ee65a8c}{start()} method.
+
+/param num\+Channels\+In is the number of channels that input into this filter with this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control}.
+
+/param num\+Channels\+Out is the number of channels that will output from this filter with this \hyperlink{classCRTSControl}{C\+R\+T\+S\+Control}.
+
+/param c the filters C\+R\+TS control \mbox{\Hypertarget{classCRTSController_a883c09ddb21374753c3be0fc66f016fb}\label{classCRTSController_a883c09ddb21374753c3be0fc66f016fb}} 
+\index{C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}!stop@{stop}}
+\index{stop@{stop}!C\+R\+T\+S\+Controller@{C\+R\+T\+S\+Controller}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily virtual void C\+R\+T\+S\+Controller\+::stop (\begin{DoxyParamCaption}\item[{\hyperlink{classCRTSControl}{C\+R\+T\+S\+Control} $\ast$}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+stop is called just before the filters stop.
+
+A module class that inherits \hyperlink{classCRTSController}{C\+R\+T\+S\+Controller} may opt out of writing a \hyperlink{classCRTSController_a883c09ddb21374753c3be0fc66f016fb}{stop()} method.
+
+/param c the filters C\+R\+TS control 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/progb/git/crts/include/crts/Filter.\+hpp\end{DoxyCompactItemize}

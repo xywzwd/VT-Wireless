@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8"/>
+    <script src='/load.js'></script>
+    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script type="text/javascript" src="plotly.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script>
+
+    require('/spectrum/feed.js');
+
+    onload = function() {
+
+        createSession(function(io) {
+            var spc = spectrumFeeds(io, {
+                // newSpectrum callback
+                newSpectrum: function(id) {  
+                    console.log('newSpectrum:' + [...arguments]);
+                    console.log("SUBSCRIBING TO: " + id);
+                    spc.subscribe(id,  function() {
+                        // console.log('a-----------------a');
+                        // console.log([...arguments]);
+                        document.getElementById("data").innerHTML = [...arguments];
+                    });
+                },
+                spectrumEnd: function() {
+                    console.log('spectrumEnd:' + [...arguments]);
+                }
+            });
+        }, false/* no admin panel*/);
+    };
+    </script>
+
+
+    <title>CRTS</title>
+</head>
+<body>
+    <!-- <svg width="460" height="12"><g trasnform="translate(40,10)"></g><svg>plot1<p> -->
+    <!-- <h1>Console Spectrum Feed Test</h1>
+
+    <p>This uses <e>/spectrum/feed.js</e> and writes
+    spectrum events to the console.log().  Open the
+    browser debugger console and see the spew from
+    spectrum events.</p>
+
+    <p>This is not intended to be an end all killer web app
+    page.  It just intended to show how to read spectrum events
+    as we have defined them here in <e>/spectrum/feed.js</e>
+    in the object constructor function <e>spectrumFeeds()</e>.</p> -->
+
+    
+    <div class="container-fluid">
+    	<div class="row">
+    		<div class="col-3">
+    			<div class="list-group">
+    				<div>
+    					<h2 class="text-primary">Spectrum Display</h1>
+    				</div>
+    				<div>
+    					<h4>USRP Feed Node</h3>
+    					<div class="list-group">
+    						<form>
+							  <div class="form-group">
+							    <label for="formControlRange" class="text-warning">Frequency</label>
+							    <input type="range" min="1" max="1500" value="914.5" class="form-control-range" id="myRange1">
+							    <div>Value: <span id="value1" class="text-danger"></span>MHz</div>
+							  </div>
+							</form>
+    						<form>
+							  <div class="form-group">
+							    <label class="text-warning">Bandwidth</label>
+							    <input type="range" min="0" max="1000" value="500" class="form-control-range" id="myRange2">
+							    <div>Value: <span id="value2" class="text-danger"></span>KHz</div>
+							  </div>
+							</form>
+							<form>
+							  <div class="form-group">
+							    <label class="text-warning">Time</label>
+							    <input type="range" min="0" max="200" value="50" class="form-control-range" id="myRange3">
+							    <div>Value: <span id="value3" class="text-danger"></span>ms</div>
+							  </div>
+							</form>						
+    					</div>
+    				</div>
+    				<div>
+    					<button class="btn btn-success" onclick="getData()">Create Plot</button>
+    				</div>
+    				<div>
+    					<h6><a href=".">Back to index</a></h6>
+    				</div>
+    			</div>
+    		</div>
+    		<div class="col-9">
+    			<div>Plot1</div>
+    			<div id="plot1" style="height: 500px; margin-bottom: 50px;"></div>
+    			<div>Plot2</div>
+    			<div id="plot2" style="height: 500px; margin-bottom: 50px;"></div>
+    			<div>Plot3</div>
+    			<div id="plot3" style="height: 500px; margin-bottom: 50px;"></div>
+    			<!-- <div>Data</div> -->
+                <div id="data" style="display: none;"></div> 
+    		</div>
+    	</div>
+    </div>
+
+
+
+    <script type="text/javascript">
+    	var slider = document.getElementById("myRange1");
+		var output = document.getElementById("value1");
+		var slider2 = document.getElementById("myRange2");
+		var output2 = document.getElementById("value2");
+		var slider3 = document.getElementById("myRange3");
+		var output3 = document.getElementById("value3");
+
+		output.innerHTML = slider.value; 
+		slider.oninput = function() {
+  		output.innerHTML = this.value;
+		}
+
+		output2.innerHTML = slider2.value; 
+		slider2.oninput = function() {
+  		output2.innerHTML = this.value;
+		}
+
+		output3.innerHTML = slider3.value; 
+		slider3.oninput = function() {
+  		output3.innerHTML = this.value;
+		}
+
+        // function getData() {
+        //     var text = document.getElementById("data").innerText;
+        //     console.log("-------------" + text);
+
+           
+        // }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="plot3.js"></script>
+  <!-- <script type="text/javascript" src="poorveshjs.js"></script> -->
+    <!-- <script type="text/javascript" src="plot1.js"></script> -->
+    <!-- <script type="text/javascript" src="throughput.js"></script> -->
+</body>
+</html>
